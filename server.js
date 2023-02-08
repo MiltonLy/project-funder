@@ -5,7 +5,14 @@ const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+const handlebars = require('express-handlebars');
+
 const app = express();
+
+app.engine(handlebars({ helpers: {} }));
+app.set('view engine', 'handlebars');
+app.set('views', 'views');
+
 const PORT = process.env.PORT || 3001;
 
 const sess = {
@@ -14,8 +21,8 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
