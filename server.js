@@ -7,9 +7,12 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const handlebars = require('express-handlebars');
 
+
 const app = express();
 
-app.engine('handleabrs', handlebars({ helpers: {} }));
+// const hbs = exphbs.create({ helpers });
+
+app.engine('handlebars', handlebars({ helpers: {} }));
 app.set('view engine', 'handlebars');
 app.set('views', 'views');
 
