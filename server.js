@@ -9,7 +9,7 @@ const handlebars = require('express-handlebars');
 
 const app = express();
 
-app.engine(handlebars({ helpers: {} }));
+app.engine('handleabrs', handlebars({ helpers: {} }));
 app.set('view engine', 'handlebars');
 app.set('views', 'views');
 
