@@ -31,7 +31,7 @@ router.get('/project/:id', withAuth, async (req, res) => {
 });
 
 // It's done when the /profile route renders the logged-in user's projects and a form to create a new project.
-router.get('/project', withAuth, async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
     try {
         // matching user email with db
         const userProjects = await Project.findAll({
@@ -51,7 +51,7 @@ router.get('/project', withAuth, async (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/login');
+        res.redirect('/profile');
         return;
     }
     res.render('login')
