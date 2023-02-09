@@ -3,9 +3,10 @@ const { User } = require('../../models');
 
 // creating new user
 router.post('/', async (req, res) => {
+  console.log('HIT ENDPOINT');
   try {
     const userData = await User.create({
-      username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
@@ -18,6 +19,7 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
+    throw err;
   }
 });
 

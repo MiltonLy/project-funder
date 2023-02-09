@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Project } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.post('/', async (req, res) => {
   try {
@@ -34,4 +35,16 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/me', withAuth, async (req, res) => {
+  try {
+    const projects = await Project.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+    res.json(projects.map((project) => project.get({ plain: true })));
+  } catch (e) {
+    res.status(500).json(e);
+  }
+});
 module.exports = router;
