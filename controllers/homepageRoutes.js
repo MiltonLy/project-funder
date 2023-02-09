@@ -12,7 +12,8 @@ router.get('/', async (req, res) => {
       ],
     });
     const projects = projectData.map((project) => project.get({ plain: true }));
-    res.render('index', { projects });
+    console.log({ projects, logged_in: req.session?.logged_in });
+    res.render('index', { projects, logged_in: req.session?.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -26,7 +27,7 @@ router.get('/project/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    res.render('', { project });
+    res.render('', { project, logged_in: req.session?.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
