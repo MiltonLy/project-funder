@@ -1,3 +1,9 @@
-<h1>{{project.name}}</h1>
-<p>{{project.description}}</p>
-<p>${{project.needed_funding}}</p>
+<div>
+	<a href="/project/{{project.id}}"><h1>{{project.name}}</h1></a>
+	{{#if allowDelete}}
+		<button class="delete" data-id="{{project.id}}">Delete</button>
+	{{/if}}
+	<hr/>
+	<p>{{project.description}}</p>
+	<p>${{project.needed_funding}}</p>
+</div>

@@ -12,7 +12,7 @@ function handleLogin(event) {
   }).then((response) => {
     console.log(response);
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/profile');
     } else {
       alert('Failed to log in.');
     }
@@ -33,7 +33,7 @@ function handleRegister(event) {
     }),
   }).then((response) => {
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/profile');
     } else {
       alert('Failed to register.');
     }

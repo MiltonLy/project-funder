@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
       ],
     });
     const projects = projectData.map((project) => project.get({ plain: true }));
-    console.log({ projects, logged_in: req.session?.logged_in });
     res.render('index', { projects, logged_in: req.session?.logged_in });
   } catch (err) {
     console.log(err);
@@ -21,12 +20,11 @@ router.get('/', async (req, res) => {
 });
 router.get('/project/:id', async (req, res) => {
   try {
-    const project = await Project.findByPk({
-      where: {
-        id: req.params.id,
-      },
+    const project = await Project.findByPk(req.params.id);
+    res.render('project', {
+      x: project.get({ plain: true }),
+      logged_in: req.session?.logged_in,
     });
-    res.render('', { project, logged_in: req.session?.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -47,7 +45,7 @@ router.get('/profile', withAuth, async (req, res) => {
       project.get({ plain: true })
     );
     // projects by user
-    res.render('profile', { projects });
+    res.render('profile', { projects, logged_in: req.session?.logged_in });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

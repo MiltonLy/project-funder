@@ -1,17 +1,18 @@
 <section>
     {{!-- logged in user's projects --}}
     {{#each projects}}
-        {{> projectCard project=this}}
+        {{> projectCard project=this allowDelete=true}}
     {{/each}}
 
     <form id="new-project">
-        <label for="name">Project Name</label>
-        <input id="new-project-name" type="text"><br>
-        <label for="description">Project description</label>
+        <label for="new-project-name">Project Name</label>
+        <input id="new-project-name" type="text" name="name"><br>
+        <label for="new-project-description">Project description</label>
         <textarea id="new-project-description" name="description" cols="20" rows="5"></textarea><br>
-        <label for="needed_funding">Funding needed</label>
-        <input id="new-project-funding" type="number">
+        <label for="new-project-funding">Funding needed</label>
+        <input id="new-project-funding" type="number" name="needed_funding">
         <button type="submit" value="submit">Submit</button>
     </form>
 </section>
 
+<script src="/js/profile.js"></script>
