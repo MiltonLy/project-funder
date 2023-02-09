@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 router.get('/project/:id', async (req, res) => {
   try {
     const project = await Project.findByPk({
@@ -35,9 +34,32 @@ router.get('/project/:id', async (req, res) => {
 });
 
 // It's done when the /profile route renders the logged-in user's projects and a form to create a new project.
-router.get('/project', withAuth, async (req, res) => {});
+router.get('/profile', withAuth, async (req, res) => {
+  try {
+    // matching user email with db
+    const userProjects = await Project.findAll({
+      where: {
+        // is this right?
+        user_id: req.session.user_id,
+      },
+    });
+    const projects = userProjects.map((project) =>
+      project.get({ plain: true })
+    );
+    // projects by user
+    res.render('profile', { projects });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/profile');
+    return;
+  }
   res.render('login');
 });
+
 module.exports = router;
