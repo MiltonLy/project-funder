@@ -42,7 +42,7 @@ router.get('/project', withAuth, async (req, res) => {
         })
         const projects = userProjects.map((project) => project.get({ plain:true }));
         // projects by user
-        res.render('project', { projects });
+        res.render('profile', { projects });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
